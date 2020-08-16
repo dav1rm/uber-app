@@ -2,7 +2,7 @@ module.exports = {
   env: {
     es2020: true,
   },
-  extends: ['plugin:react/recommended', 'airbnb', 'prettier', 'prettier/react'],
+  extends: ['plugin:react/recommended'],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -27,13 +27,5 @@ module.exports = {
     'react-hooks/exhaustive-deps': 'warn',
     'import/prefer-default-export': 'off',
     'import/no-duplicates': 'off',
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
   },
 };

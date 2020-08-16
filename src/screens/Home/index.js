@@ -4,8 +4,7 @@ import MapView from 'react-native-maps';
 import Geolocation from "@react-native-community/geolocation";
 import Geocoder from "react-native-geocoding";
 import MapViewDirections from 'react-native-maps-directions';
-import { GOOGLE_MAP_API_KEY } from 'react-native-dotenv';
-
+import { GOOGLE_MAP_API_KEY } from '../../config/dev';
 import useRequest from '../../hooks/useRequest';
 
 import {
