@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeStack from "./HomeStack";
+import HomeDrawer from "./HomeDrawer";
 import LoginScreen from "../screens/Login";
 import RegisterScreen from "../screens/Register";
 
@@ -17,7 +17,7 @@ const AuthStack = () => {
       }}>
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
-        <Stack.Screen name="HomeStack" component={HomeStack} />
+        <Stack.Screen name="HomeDrawer" component={HomeDrawer} />
       </Stack.Navigator>
   );
 };

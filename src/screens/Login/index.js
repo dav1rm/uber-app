@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { StatusBar, Platform, Text, ActivityIndicator } from "react-native";
+import { StatusBar, Platform, ActivityIndicator } from "react-native";
 import { connect } from "react-redux";
 import { StackActions } from '@react-navigation/native';
 
@@ -43,7 +43,7 @@ const Login = props => {
         alert(res.error);
       } else {
         props.setToken(res.token);
-        props.navigation.dispatch(StackActions.replace('HomeStack'));
+        props.navigation.dispatch(StackActions.replace('HomeDrawer'));
       }
     }
   }, [email, password]);
@@ -58,7 +58,7 @@ const Login = props => {
         alert(res.error);
       } else {
         props.setToken(res.token);
-        props.navigation.dispatch(StackActions.replace('HomeStack'));
+        props.navigation.dispatch(StackActions.replace('HomeDrawer'));
       }
     }
   }, [name, email, password]);

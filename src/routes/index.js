@@ -1,16 +1,16 @@
 import React from 'react';
 import { connect } from "react-redux";
 
-import HomeStack from "./HomeStack";
+import HomeDrawer from "./HomeDrawer";
 import AuthStack from "./AuthStack";
 
 
 const Routes = props => {
-  if(props.token) {
+  if(!props.token) {
     return <AuthStack />;
   }
 
-  return <HomeStack />;
+  return <HomeDrawer />;
 }
 
 const mapStateToProps = state => {
