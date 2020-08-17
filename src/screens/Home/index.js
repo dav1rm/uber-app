@@ -4,6 +4,8 @@ import MapView from 'react-native-maps';
 import Geolocation from "@react-native-community/geolocation";
 import Geocoder from "react-native-geocoding";
 import MapViewDirections from 'react-native-maps-directions';
+
+import AddressModal from '../../components/AddressModal';
 import { GOOGLE_MAP_API_KEY } from '../../config/dev';
 import useRequest from '../../hooks/useRequest';
 
@@ -42,6 +44,9 @@ const Home = () => {
   const [requestDistance, setRequestDistance] = useState(0);
   const [requestTime, setRequestTime] = useState(0);
   const [requestPrice, setRequestPrice] = useState(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalTitle, setModalTitle] = useState('');
+  const [modalField, setModalField] = useState('');
 
   // Refs
   const mapRef = useRef();
@@ -88,28 +93,15 @@ const Home = () => {
   };
 
   const handleFromPress = () => {
-    // TODO
+    setModalTitle('Escolha uma origem')
+    setModalField('from');
+    setModalVisible(true);
   };
 
-  const handleToPress = async () => {
-    const geo = await Geocoder.from('instituto metropole digital, natal rn');
-
-    if(geo.results.length > 0) {
-      const { lat, lng } = geo.results[0].geometry.location;
-      const loc = {
-        name: geo.results[0].formatted_address,
-        center: {
-          latitude: lat,
-          longitude: lng,
-        },
-        zoom: 16,
-        pitch: 0,
-        altitude: 0,
-        heading: 0,
-      };
-
-      setToLoc(loc);
-    }
+  const handleToPress = () => {
+    setModalTitle('Escolha um destino')
+    setModalField('to');
+    setModalVisible(true);
   };
 
   const handleDirectionsReady = async res => {
@@ -129,13 +121,12 @@ const Home = () => {
         bottom: 50,
         top: 550,
       }
-    })
+    });
   };
 
   const handleConfirmRequest = () => {
     // TODO
   };
-
 
   const handleCancelRequest = () => {
     setToLoc({});
@@ -154,12 +145,27 @@ const Home = () => {
     setMapLoc(cam);
   };
 
+  const handleSelectAddress = loc => {
+    if(modalField === 'to') {
+      setToLoc(loc);
+    }else {
+      setMapLoc(loc);
+      setFromLoc(loc)
+    }
+  };
+
   return (
     <Container>
       <StatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent
+      />
+      <AddressModal
+        title={modalTitle}
+        visible={modalVisible}
+        setModalVisible={setModalVisible}
+        selectAddress={handleSelectAddress}
       />
       <MapView
         ref={mapRef}
